@@ -36,7 +36,7 @@ class _HomePageState extends State<HomePage> {
                         text: TextSpan(
                           style: TextStyle(fontSize: 20),
                           children: <TextSpan>[
-                            TextSpan(text: 'Upcoming Tutorial\n'),
+                            TextSpan(text: 'new Page\n'),
                             TextSpan(
                               text: value.title,
                               style: TextStyle(fontSize: 48),
@@ -66,7 +66,7 @@ class _HomePageState extends State<HomePage> {
     return Consumer<MenuInfo>(
       builder: (BuildContext context, MenuInfo value, Widget? child) {
         return MaterialButton(
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.only(topRight: Radius.circular(32))),
+          shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(32))),
           padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 16.0),
           color: currentMenuInfo.menuType == value.menuType ? CustomColors.menuBackgroundColor : CustomColors.pageBackgroundColor,
           onPressed: () {
@@ -78,6 +78,7 @@ class _HomePageState extends State<HomePage> {
               Image.asset(
                 currentMenuInfo.imageSource!,
                 scale: 1.5,
+
               ),
               const SizedBox(width: 16),
               Text(

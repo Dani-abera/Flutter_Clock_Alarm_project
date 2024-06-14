@@ -65,7 +65,7 @@ class ClockPainter extends CustomPainter {
     var outlineBrush = Paint()
       ..color = CustomColors.clockOutline
       ..style = PaintingStyle.stroke
-      ..strokeWidth = size.width / 20;
+      ..strokeWidth = size.width / 10;
     var centerDotBrush = Paint()..color = CustomColors.clockOutline;
 
     var secHandBrush = Paint()
@@ -91,7 +91,7 @@ class ClockPainter extends CustomPainter {
     var dashBrush = Paint()
       ..color = CustomColors.clockOutline
       ..style = PaintingStyle.stroke
-      ..strokeWidth = 1;
+      ..strokeWidth = 2;
 
     canvas.drawCircle(center, radius * 0.75, fillBrush);
     canvas.drawCircle(center, radius * 0.75, outlineBrush);

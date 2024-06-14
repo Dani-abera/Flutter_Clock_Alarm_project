@@ -85,15 +85,15 @@ class _AlarmPageState extends State<AlarmPage> {
                               children: <Widget>[
                                 Row(
                                   children: <Widget>[
-                                    Icon(
+                                    const Icon(
                                       Icons.label,
                                       color: Colors.white,
                                       size: 24,
                                     ),
-                                    SizedBox(width: 8),
+                                    const SizedBox(width: 8),
                                     Text(
                                       alarm.title!,
-                                      style: TextStyle(color: Colors.white, fontFamily: 'avenir'),
+                                      style: const TextStyle(color: Colors.white, fontFamily: 'avenir'),
                                     ),
                                   ],
                                 ),
@@ -104,7 +104,7 @@ class _AlarmPageState extends State<AlarmPage> {
                                 ),
                               ],
                             ),
-                            Text(
+                            const Text(
                               'Mon-Fri',
                               style: TextStyle(color: Colors.white, fontFamily: 'avenir'),
                             ),
@@ -113,11 +113,11 @@ class _AlarmPageState extends State<AlarmPage> {
                               children: <Widget>[
                                 Text(
                                   alarmTime,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                       color: Colors.white, fontFamily: 'avenir', fontSize: 24, fontWeight: FontWeight.w700),
                                 ),
                                 IconButton(
-                                    icon: Icon(Icons.delete),
+                                    icon: const Icon(Icons.delete),
                                     color: Colors.white,
                                     onPressed: () {
                                       deleteAlarm(alarm.id);
@@ -149,7 +149,7 @@ class _AlarmPageState extends State<AlarmPage> {
                                   useRootNavigator: true,
                                   context: context,
                                   clipBehavior: Clip.antiAlias,
-                                  shape: RoundedRectangleBorder(
+                                  shape: const RoundedRectangleBorder(
                                     borderRadius: BorderRadius.vertical(
                                       top: Radius.circular(24),
                                     ),
@@ -173,17 +173,17 @@ class _AlarmPageState extends State<AlarmPage> {
                                                         now.year, now.month, now.day, selectedTime.hour, selectedTime.minute);
                                                     _alarmTime = selectedDateTime;
                                                     setModalState(() {
-                                                      _alarmTimeString = DateFormat('HH:mm').format(selectedDateTime);
+                                                      _alarmTimeString = DateFormat('h:mm a').format(selectedDateTime);
                                                     });
                                                   }
                                                 },
                                                 child: Text(
                                                   _alarmTimeString,
-                                                  style: TextStyle(fontSize: 32),
+                                                  style: const TextStyle(fontSize: 32),
                                                 ),
                                               ),
                                               ListTile(
-                                                title: Text('Repeat'),
+                                                title: const Text('Repeat'),
                                                 trailing: Switch(
                                                   onChanged: (value) {
                                                     setModalState(() {
@@ -193,11 +193,11 @@ class _AlarmPageState extends State<AlarmPage> {
                                                   value: _isRepeatSelected,
                                                 ),
                                               ),
-                                              ListTile(
+                                              const ListTile(
                                                 title: Text('Sound'),
                                                 trailing: Icon(Icons.arrow_forward_ios),
                                               ),
-                                              ListTile(
+                                              const ListTile(
                                                 title: Text('Title'),
                                                 trailing: Icon(Icons.arrow_forward_ios),
                                               ),
@@ -217,12 +217,9 @@ class _AlarmPageState extends State<AlarmPage> {
                                 );
                                 // scheduleAlarm();
                               },
-                              child: Column(
+                              child: const Column(
                                 children: <Widget>[
-                                  Image.asset(
-                                    'assets/add_alarm.png',
-                                    scale: 1.5,
-                                  ),
+                                  Icon(Icons.add_alarm, size: 54.0,),
                                   SizedBox(height: 8),
                                   Text(
                                     'Add Alarm',
@@ -234,7 +231,7 @@ class _AlarmPageState extends State<AlarmPage> {
                           ),
                         )
                       else
-                        Center(
+                        const Center(
                             child: Text(
                               'Only 5 alarms allowed!',
                               style: TextStyle(color: Colors.white),
@@ -242,7 +239,7 @@ class _AlarmPageState extends State<AlarmPage> {
                     ]).toList(),
                   );
                 }
-                return Center(
+                return const Center(
                   child: Text(
                     'Loading..',
                     style: TextStyle(color: Colors.white),
@@ -261,9 +258,9 @@ class _AlarmPageState extends State<AlarmPage> {
       'alarm_notif',
       'alarm_notif',
       channelDescription: 'Channel for Alarm notification',
-      icon: 'codex_logo',
+      icon: '@mipmap/ic_launcher',
       sound: RawResourceAndroidNotificationSound('a_long_cold_sting'),
-      largeIcon: DrawableResourceAndroidBitmap('codex_logo'),
+      largeIcon: DrawableResourceAndroidBitmap('@mipmap/ic_launcher'),
     );
 
     var iOSPlatformChannelSpecifics = DarwinNotificationDetails(

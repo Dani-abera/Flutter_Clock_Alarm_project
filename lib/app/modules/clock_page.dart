@@ -25,66 +25,72 @@ class _ClockPageState extends State<ClockPage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Flexible(
-            flex: 1,
-            fit: FlexFit.tight,
-            child: Text(
-              'Clock',
-              style: TextStyle(
-                  fontFamily: 'avenir', fontWeight: FontWeight.w700, color: CustomColors.primaryTextColor, fontSize: 24),
-            ),
+          Text(
+            'Clock',
+            style: TextStyle(
+                fontFamily: 'avenir',
+                fontWeight: FontWeight.w700,
+                color: CustomColors.primaryTextColor,
+                fontSize: 24),
+          ),
+          SizedBox(
+            height: 16,
           ),
           Flexible(
-            flex: 2,
+            flex: 1,
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
+                ClockView(
+                  size: MediaQuery.of(context).size.height / 4,
+                ),
+                SizedBox(
+                  height: 20,
+                ),
                 DigitalClockWidget(),
                 Text(
                   formattedDate,
                   style: TextStyle(
-                      fontFamily: 'avenir', fontWeight: FontWeight.w300, color: CustomColors.primaryTextColor, fontSize: 20),
-                ),
-              ],
-            ),
-          ),
-          Flexible(
-            flex: 4,
-            fit: FlexFit.tight,
-            child: Align(
-              alignment: Alignment.center,
-              child: ClockView(
-                size: MediaQuery.of(context).size.height / 4,
-              ),
-            ),
-          ),
-          Flexible(
-            flex: 2,
-            fit: FlexFit.tight,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Text(
-                  'Timezone',
-                  style: TextStyle(
-                      fontFamily: 'avenir', fontWeight: FontWeight.w500, color: CustomColors.primaryTextColor, fontSize: 24),
-                ),
-                SizedBox(height: 16),
-                Row(
-                  children: <Widget>[
-                    Icon(
-                      Icons.language,
+                      fontFamily: 'avenir',
+                      fontWeight: FontWeight.w300,
                       color: CustomColors.primaryTextColor,
-                    ),
-                    SizedBox(width: 16),
-                    Text(
-                      'UTC' + offsetSign + timezoneString,
-                      style: TextStyle(fontFamily: 'avenir', color: CustomColors.primaryTextColor, fontSize: 14),
-                    ),
-                  ],
+                      fontSize: 20),
                 ),
               ],
             ),
+          ),
+          const SizedBox(
+            height: 26,
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Text(
+                'Timezone',
+                style: TextStyle(
+                    fontFamily: 'avenir',
+                    fontWeight: FontWeight.w500,
+                    color: CustomColors.primaryTextColor,
+                    fontSize: 24),
+              ),
+              const SizedBox(height: 16),
+              Row(
+                children: <Widget>[
+                  Icon(
+                    Icons.language,
+                    color: CustomColors.primaryTextColor,
+                  ),
+                  SizedBox(width: 16),
+                  Text(
+                    'UTC' + offsetSign + timezoneString,
+                    style: TextStyle(
+                        fontFamily: 'avenir',
+                        color: CustomColors.primaryTextColor,
+                        fontSize: 14),
+                  ),
+                ],
+              ),
+            ],
           ),
         ],
       ),
@@ -96,6 +102,7 @@ class DigitalClockWidget extends StatefulWidget {
   const DigitalClockWidget({
     Key? key,
   }) : super(key: key);
+
   @override
   State<StatefulWidget> createState() {
     return DigitalClockWidgetState();
@@ -103,34 +110,38 @@ class DigitalClockWidget extends StatefulWidget {
 }
 
 class DigitalClockWidgetState extends State<DigitalClockWidget> {
-  var formattedTime = DateFormat('HH:mm').format(DateTime.now());
+  var formattedTime = DateFormat('h:mm:ss a').format(DateTime.now());
   late Timer timer;
 
   @override
   void initState() {
     this.timer = Timer.periodic(Duration(seconds: 1), (timer) {
       var perviousMinute = DateTime.now().add(Duration(seconds: -1)).minute;
-      var currentMinute = DateTime.now().minute;
-      if (perviousMinute != currentMinute)
+      var currentMinute = DateTime.now().second;
+      if (perviousMinute != currentMinute) {
         setState(() {
-          formattedTime = DateFormat('HH:mm').format(DateTime.now());
+          formattedTime = DateFormat('h:mm:ss a').format(DateTime.now());
         });
+      }
     });
     super.initState();
   }
 
   @override
   void dispose() {
-    this.timer.cancel();
+    timer.cancel();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    print('=====>digital clock updated');
+    print(' ********** Live Time Display ************ ');
     return Text(
       formattedTime,
-      style: TextStyle(fontFamily: 'avenir', color: CustomColors.primaryTextColor, fontSize: 64),
+      style: TextStyle(
+          fontFamily: 'avenir',
+          color: CustomColors.primaryTextColor,
+          fontSize: 64),
     );
   }
 }
