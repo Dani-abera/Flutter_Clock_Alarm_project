@@ -17,16 +17,10 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: CustomColors.pageBackgroundColor,
-      body: Row(
+      body: Column(
         children: <Widget>[
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: menuItems.map((currentMenuInfo) => buildMenuButton(currentMenuInfo)).toList(),
-          ),
-          VerticalDivider(
-            color: CustomColors.dividerColor,
-            width: 1,
-          ),
+
+
           Expanded(
             child: Consumer<MenuInfo>(
               builder: (BuildContext context, MenuInfo value, Widget? child) {
@@ -35,23 +29,34 @@ class _HomePageState extends State<HomePage> {
                 else if (value.menuType == MenuType.alarm)
                   return AlarmPage();
                 else
-                  return Container(
-                    child: RichText(
-                      text: TextSpan(
-                        style: TextStyle(fontSize: 20),
-                        children: <TextSpan>[
-                          TextSpan(text: 'Upcoming Tutorial\n'),
-                          TextSpan(
-                            text: value.title,
-                            style: TextStyle(fontSize: 48),
-                          ),
-                        ],
+                  return Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      RichText(
+                        text: TextSpan(
+                          style: TextStyle(fontSize: 20),
+                          children: <TextSpan>[
+                            TextSpan(text: 'Upcoming Tutorial\n'),
+                            TextSpan(
+                              text: value.title,
+                              style: TextStyle(fontSize: 48),
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
+                    ],
                   );
               },
             ),
           ),
+          Divider(
+            color: CustomColors.dividerColor,
+            height: 1,
+          ),
+          Row(
+             mainAxisAlignment: MainAxisAlignment.center,
+             children: menuItems.map((currentMenuInfo) => buildMenuButton(currentMenuInfo)).toList(),
+           ),
         ],
       ),
     );
@@ -62,7 +67,7 @@ class _HomePageState extends State<HomePage> {
       builder: (BuildContext context, MenuInfo value, Widget? child) {
         return MaterialButton(
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.only(topRight: Radius.circular(32))),
-          padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 0),
+          padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 16.0),
           color: currentMenuInfo.menuType == value.menuType ? CustomColors.menuBackgroundColor : CustomColors.pageBackgroundColor,
           onPressed: () {
             var menuInfo = Provider.of<MenuInfo>(context, listen: false);
@@ -74,10 +79,10 @@ class _HomePageState extends State<HomePage> {
                 currentMenuInfo.imageSource!,
                 scale: 1.5,
               ),
-              SizedBox(height: 16),
+              const SizedBox(width: 16),
               Text(
                 currentMenuInfo.title ?? '',
-                style: TextStyle(fontFamily: 'avenir', color: CustomColors.primaryTextColor, fontSize: 14),
+                style: TextStyle(fontFamily: 'avenir', color: CustomColors.seconderyTextColor, fontSize: 15, fontWeight: FontWeight.bold),
               ),
             ],
           ),

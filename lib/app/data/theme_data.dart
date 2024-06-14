@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 
 class CustomColors {
   static Color primaryTextColor = Colors.white;
-  static Color dividerColor = Colors.white54;
-  static Color pageBackgroundColor = Color(0xFF2D2F41);
-  static Color menuBackgroundColor = Color(0xFF242634);
+  static Color seconderyTextColor = Colors.black;
+  static Color dividerColor = Colors.red;
+  static Color pageBackgroundColor = Color.fromARGB(255, 89, 61, 28);
+  static Color menuBackgroundColor = Colors.white;
 
   static Color clockBG = Color(0xFF444974);
   static Color clockOutline = Color(0xFFEAECFF);
