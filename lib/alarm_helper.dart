@@ -2,7 +2,7 @@ import 'package:flutter_ai_project_alarm_clock/app/data/models/alarm_info.dart';
 import 'package:sqflite/sqflite.dart';
 
 
-final String tableAlarm = 'alarm';
+final String tableAlarm = 'alarmdani';
 final String columnId = 'id';
 final String columnTitle = 'title';
 final String columnDateTime = 'alarmDateTime';
@@ -30,7 +30,7 @@ class AlarmHelper {
 
   Future<Database> initializeDatabase() async {
     var dir = await getDatabasesPath();
-    var path = dir + "alarm.db";
+    var path = dir + "alarmdani.db";
 
     var database = await openDatabase(
       path,

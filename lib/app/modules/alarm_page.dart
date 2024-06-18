@@ -1,3 +1,5 @@
+//import 'dart:js_interop_unsafe';
+
 import 'package:flutter_ai_project_alarm_clock/alarm_helper.dart';
 import 'package:flutter_ai_project_alarm_clock/app/data/theme_data.dart';
 import 'package:flutter_ai_project_alarm_clock/app/data/models/alarm_info.dart';
@@ -25,8 +27,10 @@ class _AlarmPageState extends State<AlarmPage> {
   void initState() {
     _alarmTime = DateTime.now();
     _alarmHelper.initializeDatabase().then((value) {
-      print('------database intialized');
+      print('******** database initialized ********');
+
       loadAlarms();
+
     });
     super.initState();
   }
